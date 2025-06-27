@@ -135,9 +135,9 @@ const HomePage: React.FC = () => {
         What would you like to do today?
       </Typography>
       
-      <Grid container spacing={3} sx={{ mb: 6 }}>
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3, mb: 6 }}>
         {quickActions.map((action, index) => (
-          <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
+          <Box key={index} sx={{ flex: { xs: '1 1 100%', sm: '1 1 calc(50% - 12px)', md: '1 1 calc(25% - 18px)' } }}>
             <Card
               sx={{
                 height: '100%',
@@ -174,18 +174,18 @@ const HomePage: React.FC = () => {
                 </Typography>
               </CardContent>
             </Card>
-          </Grid>
+          </Box>
         ))}
-      </Grid>
+      </Box>
 
       {/* Featured Images */}
       <Typography variant="h2" sx={{ mb: 4, textAlign: 'center' }}>
         Featured Drawings ⭐
       </Typography>
 
-      <Grid container spacing={3}>
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
         {featuredImages.map((image, index) => (
-          <Grid size={{ xs: 12, sm: 6, md: 4 }} key={image.id}>
+          <Box key={image.id} sx={{ flex: { xs: '1 1 100%', sm: '1 1 calc(50% - 12px)', md: '1 1 calc(33.333% - 16px)' } }}>
             <Card
               sx={{
                 cursor: 'pointer',
@@ -233,9 +233,9 @@ const HomePage: React.FC = () => {
                 </Box>
               </CardContent>
             </Card>
-          </Grid>
+          </Box>
         ))}
-      </Grid>
+      </Box>
 
       {/* Fun Facts Section */}
       <Paper
@@ -249,8 +249,8 @@ const HomePage: React.FC = () => {
         <Typography variant="h3" sx={{ mb: 3, textAlign: 'center' }}>
           Did you know? 🤔
         </Typography>
-        <Grid container spacing={3}>
-          <Grid size={{ xs: 12, md: 4 }}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
+          <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 33.333%' } }}>
             <Box sx={{ textAlign: 'center' }}>
               <StarIcon sx={{ fontSize: 60, color: '#FF6B9D', mb: 2 }} />
               <Typography variant="h6" sx={{ mb: 1 }}>
@@ -260,8 +260,8 @@ const HomePage: React.FC = () => {
                 It's like a fun meditation that makes your brain happy!
               </Typography>
             </Box>
-          </Grid>
-          <Grid size={{ xs: 12, md: 4 }}>
+          </Box>
+          <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 33.333%' } }}>
             <Box sx={{ textAlign: 'center' }}>
               <AIIcon sx={{ fontSize: 60, color: '#4ECDC4', mb: 2 }} />
               <Typography variant="h6" sx={{ mb: 1 }}>
@@ -271,8 +271,8 @@ const HomePage: React.FC = () => {
                 Every drawing is special and made just for you!
               </Typography>
             </Box>
-          </Grid>
-          <Grid size={{ xs: 12, md: 4 }}>
+          </Box>
+          <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 33.333%' } }}>
             <Box sx={{ textAlign: 'center' }}>
               <BookIcon sx={{ fontSize: 60, color: '#FFE66D', mb: 2 }} />
               <Typography variant="h6" sx={{ mb: 1 }}>
@@ -282,8 +282,8 @@ const HomePage: React.FC = () => {
                 Show your friends and family your amazing creations!
               </Typography>
             </Box>
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
       </Paper>
     </Container>
   );

@@ -130,9 +130,9 @@ const UploadPage: React.FC = () => {
         Turn your artwork into a magical coloring page with AI! ✨
       </Typography>
 
-      <Grid container spacing={4}>
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
         {/* Upload Area */}
-        <Grid size={{ xs: 12, md: 6 }}>
+        <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 50%' } }}>
           <Paper
             sx={{
               p: 4,
@@ -209,10 +209,10 @@ const UploadPage: React.FC = () => {
               </Typography>
             </Paper>
           )}
-        </Grid>
+        </Box>
 
         {/* Instructions */}
-        <Grid size={{ xs: 12, md: 6 }}>
+        <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 50%' } }}>
           <Paper sx={{ p: 4, height: 'fit-content' }}>
             <Typography variant="h4" sx={{ mb: 3, color: theme.palette.primary.main }}>
               How it works! 🤔
@@ -296,8 +296,8 @@ const UploadPage: React.FC = () => {
               </Typography>
             </Alert>
           </Paper>
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
 
       {/* Recent Uploads */}
       {uploadedImages.length > 0 && (
@@ -306,9 +306,9 @@ const UploadPage: React.FC = () => {
             Your Recent Uploads 📸
           </Typography>
           
-          <Grid container spacing={3}>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
             {uploadedImages.map((image) => (
-              <Grid size={{ xs: 12, sm: 6, md: 4 }} key={image.id}>
+              <Box key={image.id} sx={{ flex: { xs: '1 1 100%', sm: '1 1 calc(50% - 12px)', md: '1 1 calc(33.333% - 16px)' } }}>
                 <Card
                   sx={{
                     cursor: image.status === 'completed' ? 'pointer' : 'default',
@@ -361,9 +361,9 @@ const UploadPage: React.FC = () => {
                     )}
                   </CardContent>
                 </Card>
-              </Grid>
+              </Box>
             ))}
-          </Grid>
+          </Box>
         </Box>
       )}
 
@@ -380,8 +380,8 @@ const UploadPage: React.FC = () => {
           Pro Tips! 💡
         </Typography>
         
-        <Grid container spacing={3}>
-          <Grid size={{ xs: 12, md: 4 }}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
+          <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 33.333%' } }}>
             <Box sx={{ textAlign: 'center' }}>
               <Typography variant="h6" sx={{ mb: 1, color: theme.palette.primary.main }}>
                 📱 Good Lighting
@@ -390,8 +390,8 @@ const UploadPage: React.FC = () => {
                 Take photos in bright, natural light for the best results!
               </Typography>
             </Box>
-          </Grid>
-          <Grid size={{ xs: 12, md: 4 }}>
+          </Box>
+          <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 33.333%' } }}>
             <Box sx={{ textAlign: 'center' }}>
               <Typography variant="h6" sx={{ mb: 1, color: theme.palette.secondary.main }}>
                 🖼️ Clear Background
@@ -400,8 +400,8 @@ const UploadPage: React.FC = () => {
                 Use a plain background so AI can focus on your drawing!
               </Typography>
             </Box>
-          </Grid>
-          <Grid size={{ xs: 12, md: 4 }}>
+          </Box>
+          <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 33.333%' } }}>
             <Box sx={{ textAlign: 'center' }}>
               <Typography variant="h6" sx={{ mb: 1, color: '#FFE66D' }}>
                 ✏️ Bold Lines
@@ -410,8 +410,8 @@ const UploadPage: React.FC = () => {
                 Drawings with clear, dark lines work best for coloring!
               </Typography>
             </Box>
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
       </Paper>
     </Container>
   );

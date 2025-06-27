@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {
   Container,
   Typography,
-  Grid,
   Card,
   CardContent,
   CardMedia,
@@ -194,8 +193,8 @@ const GalleryPage: React.FC = () => {
 
       {/* Search and Filter */}
       <Paper sx={{ p: 3, mb: 4 }}>
-        <Grid container spacing={3} alignItems="center">
-          <Grid item xs={12} md={6}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3, alignItems: 'center' }}>
+          <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 50%' } }}>
             <TextField
               fullWidth
               placeholder="Search for artwork..."
@@ -209,8 +208,8 @@ const GalleryPage: React.FC = () => {
                 ),
               }}
             />
-          </Grid>
-          <Grid item xs={12} md={3}>
+          </Box>
+          <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 25%' } }}>
             <FormControl fullWidth>
               <InputLabel>Category</InputLabel>
               <Select
@@ -224,8 +223,8 @@ const GalleryPage: React.FC = () => {
                 <MenuItem value="nature">Nature</MenuItem>
               </Select>
             </FormControl>
-          </Grid>
-          <Grid item xs={12} md={3}>
+          </Box>
+          <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 25%' } }}>
             <FormControl fullWidth>
               <InputLabel>Difficulty</InputLabel>
               <Select
@@ -239,8 +238,8 @@ const GalleryPage: React.FC = () => {
                 <MenuItem value="hard">Hard</MenuItem>
               </Select>
             </FormControl>
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
       </Paper>
 
       {/* Artwork Grid */}
@@ -264,12 +263,12 @@ const GalleryPage: React.FC = () => {
           </Button>
         </Box>
       ) : (
-        <Grid container spacing={3}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
           {filteredArtworks.map((artwork) => {
             const originalImage = coloringImages.find(img => img.id === artwork.coloringImageId);
             
             return (
-              <Grid item xs={12} sm={6} md={4} key={artwork.id}>
+              <Box key={artwork.id} sx={{ flex: { xs: '1 1 100%', sm: '1 1 calc(50% - 12px)', md: '1 1 calc(33.333% - 16px)' } }}>
                 <Card
                   sx={{
                     cursor: 'pointer',
@@ -377,10 +376,10 @@ const GalleryPage: React.FC = () => {
                     </Box>
                   </CardContent>
                 </Card>
-              </Grid>
+              </Box>
             );
           })}
-        </Grid>
+        </Box>
       )}
 
       {/* Artwork Detail Dialog */}
@@ -399,8 +398,8 @@ const GalleryPage: React.FC = () => {
               </Box>
             </DialogTitle>
             <DialogContent>
-              <Grid container spacing={3}>
-                <Grid item xs={12} md={6}>
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
+                <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 50%' } }}>
                   <img
                     src={selectedArtwork.coloredImageUrl}
                     alt={selectedArtwork.title}
@@ -410,8 +409,8 @@ const GalleryPage: React.FC = () => {
                       borderRadius: '8px'
                     }}
                   />
-                </Grid>
-                <Grid item xs={12} md={6}>
+                </Box>
+                <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 50%' } }}>
                   <Typography variant="h6" sx={{ mb: 2 }}>
                     About this artwork:
                   </Typography>
@@ -448,8 +447,8 @@ const GalleryPage: React.FC = () => {
                   <Typography variant="body2" color="text.secondary">
                     Created on: {selectedArtwork.createdAt.toLocaleDateString()}
                   </Typography>
-                </Grid>
-              </Grid>
+                </Box>
+              </Box>
             </DialogContent>
             <DialogActions>
               <Button onClick={() => setShowArtworkDialog(false)}>
