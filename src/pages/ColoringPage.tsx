@@ -5,7 +5,6 @@ import {
   Box,
   Paper,
   Button,
-  Grid,
   Slider,
   IconButton,
   Tooltip,
@@ -283,9 +282,9 @@ const ColoringPage: React.FC = () => {
         {coloringImage.title} 🎨
       </Typography>
 
-      <Grid container spacing={3}>
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
         {/* Tools Panel */}
-        <Grid size={{ xs: 12, md: 3 }}>
+        <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 25%' } }}>
           <Paper sx={{ p: 3, height: 'fit-content' }}>
             <Typography variant="h6" sx={{ mb: 2 }}>
               Tools 🛠️
@@ -428,10 +427,10 @@ const ColoringPage: React.FC = () => {
               </Button>
             </Box>
           </Paper>
-        </Grid>
+        </Box>
 
         {/* Canvas */}
-        <Grid size={{ xs: 12, md: 9 }}>
+        <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 75%' } }}>
           <Paper sx={{ p: 2, textAlign: 'center' }}>
             <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
               <canvas
@@ -447,8 +446,8 @@ const ColoringPage: React.FC = () => {
               Use your mouse or finger to color! 🖱️👆
             </Typography>
           </Paper>
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
 
       {/* Story Dialog */}
       <Dialog
