@@ -48,6 +48,7 @@ function App() {
   const [selectedPages, setSelectedPages] = useState(5);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [showCover, setShowCover] = useState(true);
 
   // Handle window resize
   useEffect(() => {
@@ -157,30 +158,80 @@ function App() {
   }, [selectedPages, iconComponents]);
 
   useEffect(() => {
-    generateOutlines();
-  }, [generateOutlines]);
+    if (!showCover) {
+      generateOutlines();
+    }
+  }, [generateOutlines, showCover]);
+
+  // Function to start coloring with selected category
+  const startColoring = (category) => {
+    setSelectedCategory(category);
+    setShowCover(false);
+  };
+
+  // Cover page component
+  const CoverPage = () => (
+    <div className="cover-page">
+      <div className="cover-content">
+        <div className="cover-icon">
+          <GiButterfly size={120} style={{ color: '#ff6b6b' }} />
+        </div>
+        <h1 className="cover-title">Coloring Outline</h1>
+        <p className="cover-subtitle">Create Beautiful Coloring Pages</p>
+        <div className="cover-features">
+          <div className="feature" onClick={() => startColoring('all')}>
+            <GiButterfly size={40} style={{ color: '#ff6b6b' }} />
+            <span>All Categories</span>
+          </div>
+          <div className="feature" onClick={() => startColoring('animals')}>
+            <GiElephant size={40} style={{ color: '#4ecdc4' }} />
+            <span>Animals & Nature</span>
+          </div>
+          <div className="feature" onClick={() => startColoring('transports')}>
+            <IoCarOutline size={40} style={{ color: '#45b7d1' }} />
+            <span>Transportation</span>
+          </div>
+          <div className="feature" onClick={() => startColoring('alphabets')}>
+            <AlphabetOutline letter="A" size={40} />
+            <span>Alphabets</span>
+          </div>
+          <div className="feature" onClick={() => startColoring('fantasy')}>
+            <GiUnicorn size={40} style={{ color: '#96ceb4' }} />
+            <span>Fantasy & Magic</span>
+          </div>
+          <div className="feature" onClick={() => startColoring('birds')}>
+            <GiEagleEmblem size={40} style={{ color: '#feca57' }} />
+            <span>Birds</span>
+          </div>
+          <div className="feature" onClick={() => startColoring('insects')}>
+            <GiBee size={40} style={{ color: '#ff9ff3' }} />
+            <span>Insects</span>
+          </div>
+          <div className="feature" onClick={() => startColoring('nature')}>
+            <IoLeafOutline size={40} style={{ color: '#48dbfb' }} />
+            <span>Nature</span>
+          </div>
+        </div>
+        <p className="cover-description">
+          Click on any category to start creating beautiful coloring pages. 
+          Print on A4 paper for the best experience.
+        </p>
+      </div>
+    </div>
+  );
+
+  // Show cover page if showCover is true
+  if (showCover) {
+    return <CoverPage />;
+  }
 
   return (
     <div className="App">
       <div className="controls">
         <div className="print-controls">
-          <label htmlFor="categorySelect">Category:</label>
-          <select
-            id="categorySelect"
-            value={selectedCategory}
-            onChange={e => setSelectedCategory(e.target.value)}
-            className="category-select"
-            style={{ marginRight: 16 }}
-          >
-            <option value="all">All</option>
-            <option value="alphabets">Alphabets</option>
-            <option value="animals">Animals</option>
-            <option value="birds">Birds</option>
-            <option value="transports">Transports</option>
-            <option value="insects">Insects</option>
-            <option value="fantasy">Fantasy</option>
-            <option value="nature">Nature</option>
-          </select>
+          <button className="back-btn" onClick={() => setShowCover(true)}>
+            ← Back to Cover
+          </button>
           <label htmlFor="pageCount">Number of Pages:</label>
           <select
             id="pageCount"
