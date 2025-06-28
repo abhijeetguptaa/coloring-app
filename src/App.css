@@ -1,8 +1,8 @@
 .App {
   text-align: center;
-  padding: 10px;
-  background-color: #f5f5f5;
-  min-height: 100vh;
+  padding: 20px;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .landing-page {
@@ -24,124 +24,90 @@
 }
 
 .controls {
-  margin-bottom: 20px;
-  padding: 20px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: sticky;
   top: 0;
+  background: white;
+  padding: 15px;
+  border-bottom: 2px solid #eee;
   z-index: 100;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .print-controls {
   display: flex;
-  align-items: center;
-  gap: 15px;
   flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
   justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .print-controls label {
   font-weight: bold;
   color: #333;
-  font-size: 16px;
+  white-space: nowrap;
 }
 
-.page-select {
-  padding: 10px 15px;
-  border: 2px solid #007bff;
-  border-radius: 5px;
+.page-select, .category-select {
+  padding: 8px 12px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
   font-size: 14px;
-  background-color: white;
-  color: #333;
+  background: white;
   cursor: pointer;
   min-width: 120px;
 }
 
-.page-select:focus {
-  outline: none;
-  border-color: #0056b3;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-}
-
 .print-btn {
-  padding: 12px 24px;
-  border: none;
-  border-radius: 5px;
-  background-color: #28a745;
+  background: #007bff;
   color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: 500;
-  transition: background-color 0.3s, transform 0.2s;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s;
 }
 
 .print-btn:hover {
-  background-color: #1e7e34;
-  transform: translateY(-1px);
-}
-
-.print-btn:active {
-  transform: translateY(0);
+  background: #0056b3;
 }
 
 .pages-container {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 30px;
-  max-width: 900px;
-  margin: 0 auto;
-  padding-bottom: 30px;
+  align-items: center;
 }
 
 .outline-page {
-  background-color: white;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  width: 800px;
-  min-height: 1000px;
-  display: flex;
-  flex-direction: column;
-  page-break-after: always;
-}
-
-.page-header {
-  margin-bottom: 20px;
-  text-align: center;
-  border-bottom: 2px solid #333;
-  padding-bottom: 15px;
-}
-
-.page-header h2 {
-  margin: 0 0 10px 0;
-  color: #333;
-  font-size: 2em;
-  font-weight: bold;
-}
-
-.page-header p {
-  margin: 0;
-  font-size: 1.1em;
-  color: #666;
-  font-weight: 500;
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .image-container {
-  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  position: relative;
+}
+
+.image-container > div {
+  max-width: 100%;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 20px 0;
-  min-height: 700px;
-  border: 1px solid #eee;
-  border-radius: 4px;
-  background-color: #fafafa;
 }
 
 .outline-image {
@@ -158,98 +124,30 @@
 }
 
 .loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 200px;
-  font-size: 1.2em;
+  font-size: 18px;
   color: #666;
-  font-weight: 500;
+  margin: 40px 0;
 }
 
 .page-footer {
   margin-top: 20px;
-  border-top: 2px solid #333;
-  padding-top: 15px;
   text-align: left;
 }
 
 .page-footer p {
   margin: 10px 0;
-  font-size: 1.1em;
   color: #333;
-  font-weight: 500;
+  font-size: clamp(14px, 3vw, 16px);
 }
 
-/* Print styles */
-@media print {
+/* Responsive breakpoints */
+@media (max-width: 768px) {
   .App {
-    background-color: white;
-    padding: 0;
+    padding: 10px;
   }
   
   .controls {
-    display: none;
-  }
-  
-  .pages-container {
-    gap: 0;
-    padding-bottom: 0;
-  }
-  
-  .outline-page {
-    box-shadow: none;
-    border: none;
-    padding: 20px;
-    margin: 0;
-    width: 100%;
-    min-height: auto;
-    page-break-after: always;
-  }
-  
-  .page-header {
-    border-bottom: 1px solid #000;
-    margin-bottom: 15px;
-  }
-  
-  .page-header h2 {
-    font-size: 1.5em;
-  }
-  
-  .image-container {
-    border: none;
-    background-color: white;
-    min-height: 600px;
-  }
-  
-  .outline-image {
-    max-height: 600px;
-  }
-  
-  .page-footer {
-    border-top: 1px solid #000;
-  }
-  
-  .loading {
-    display: none;
-  }
-  
-  /* Ensure each page fits on A4 */
-  @page {
-    size: A4;
-    margin: 1cm;
-  }
-}
-
-/* Responsive design */
-@media (max-width: 900px) {
-  .pages-container {
-    max-width: 95%;
-  }
-  
-  .outline-page {
-    width: 100%;
-    padding: 20px;
+    padding: 10px;
   }
   
   .print-controls {
@@ -257,7 +155,136 @@
     gap: 10px;
   }
   
-  .page-select {
+  .print-controls > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .page-select, .category-select {
     min-width: 150px;
+    font-size: 16px;
+    padding: 10px;
+  }
+  
+  .print-btn {
+    width: 100%;
+    max-width: 200px;
+    padding: 12px;
+    font-size: 16px;
+  }
+  
+  .outline-page {
+    padding: 15px;
+    margin: 10px 0;
+  }
+  
+  .image-container > div {
+    max-width: 400px;
+  }
+  
+  .image-container > div > svg,
+  .image-container > div > * {
+    max-width: 400px;
+    max-height: 400px;
+  }
+
+  /* Fix color guide overlapping on mobile */
+  .image-container {
+    margin: 10px 0;
+    padding-top: 60px; /* Add space for color guide */
+  }
+}
+
+@media (max-width: 480px) {
+  .App {
+    padding: 5px;
+  }
+  
+  .controls {
+    padding: 8px;
+  }
+  
+  .print-controls {
+    gap: 8px;
+  }
+  
+  .page-select, .category-select {
+    min-width: 120px;
+    font-size: 14px;
+    padding: 8px;
+  }
+  
+  .print-btn {
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  .outline-page {
+    padding: 10px;
+  }
+  
+  .page-footer p {
+    font-size: 14px;
+  }
+  
+  .image-container > div {
+    max-width: 300px;
+  }
+  
+  .image-container > div > svg,
+  .image-container > div > * {
+    max-width: 300px;
+    max-height: 300px;
+  }
+
+  /* Fix color guide overlapping on small mobile */
+  .image-container {
+    margin: 5px 0;
+    padding-top: 50px; /* Add space for smaller color guide */
+  }
+}
+
+@media (min-width: 1200px) {
+  .outline-page {
+    max-width: 800px;
+  }
+  
+  .image-container > div {
+    max-width: 600px;
+  }
+}
+
+/* Print styles */
+@media print {
+  .controls {
+    display: none;
+  }
+  
+  .App {
+    padding: 0;
+  }
+  
+  .outline-page {
+    page-break-after: always;
+    border: none;
+    box-shadow: none;
+    padding: 20px;
+  }
+  
+  .outline-page:last-child {
+    page-break-after: auto;
+  }
+  
+  .image-container > div {
+    width: 100%;
+    height: auto;
+  }
+  
+  .image-container > div > svg,
+  .image-container > div > * {
+    width: 100%;
+    height: auto;
   }
 }

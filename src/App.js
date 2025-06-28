@@ -47,6 +47,46 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [selectedPages, setSelectedPages] = useState(5);
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  // Handle window resize
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Calculate responsive icon sizes
+  const getIconSize = () => {
+    if (windowWidth <= 480) return 300; // Mobile
+    if (windowWidth <= 768) return 400; // Tablet
+    if (windowWidth <= 1200) return 500; // Small desktop
+    return 600; // Large desktop
+  };
+
+  const getGuideIconSize = () => {
+    if (windowWidth <= 480) return 30; // Mobile
+    if (windowWidth <= 768) return 35; // Tablet
+    return 42; // Desktop
+  };
+
+  const getGuideContainerSize = () => {
+    if (windowWidth <= 480) return 80; // Mobile
+    if (windowWidth <= 768) return 90; // Tablet
+    return 105; // Desktop
+  };
+
+  const getGuideIconContainerSize = () => {
+    if (windowWidth <= 480) return 40; // Mobile
+    if (windowWidth <= 768) return 45; // Tablet
+    return 56; // Desktop
+  };
+
+  const getGuidePosition = () => {
+    if (windowWidth <= 480) return { top: '5px', right: '5px' }; // Mobile
+    if (windowWidth <= 768) return { top: '10px', right: '10px' }; // Tablet
+    return { top: '0px', right: '0px' }; // Desktop
+  };
 
   // Generate alphabet outline components
   const alphabetComponents = useMemo(() => {
@@ -172,16 +212,19 @@ function App() {
             const mixedColor = getMixedColors(selectedCategory, index);
             return (
               <div key={index} className="outline-page">
-                <div className="page-header">
-                  <h2>Cartoon Coloring Outline</h2>
-                  <p>Page {index + 1} of {selectedPages}</p>
-                </div>
-                
                 <div className="image-container" style={{ position: 'relative' }}>
-                  <div style={{ width: '600px', height: '600px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <div style={{ 
+                    width: `${getIconSize()}px`, 
+                    height: `${getIconSize()}px`, 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center',
+                    maxWidth: '100%',
+                    maxHeight: '100%'
+                  }}>
                     {/* Main outline icon for coloring */}
                     <IconComponent
-                      size={600}
+                      size={getIconSize()}
                       style={{
                         color: 'black',
                         stroke: 'black',
@@ -193,10 +236,10 @@ function App() {
                   {/* Filled colored guide in top right corner */}
                   <div style={{
                     position: 'absolute',
-                    top: '0px',
-                    right: '0px',
-                    width: '105px',
-                    height: '105px',
+                    top: getGuidePosition().top,
+                    right: getGuidePosition().right,
+                    width: `${getGuideContainerSize()}px`,
+                    height: `${getGuideContainerSize()}px`,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -205,24 +248,33 @@ function App() {
                     borderRadius: '10px',
                     border: '5px solid #333',
                     boxShadow: '0 4px 12px rgba(0,0,0,0.5)',
-                    zIndex: 10
+                    zIndex: 10,
+                    boxSizing: 'border-box'
                   }}>
-                    <div style={{ fontSize: '12px', fontWeight: 'bold', marginBottom: '5px', color: '#333' }}>
+                    <div style={{ 
+                      fontSize: windowWidth <= 480 ? '10px' : '12px', 
+                      fontWeight: 'bold', 
+                      marginBottom: '3px', 
+                      color: '#333',
+                      textAlign: 'center',
+                      lineHeight: '1'
+                    }}>
                       COLOR GUIDE
                     </div>
                     <div style={{
-                      width: '56px',
-                      height: '56px',
+                      width: `${getGuideIconContainerSize()}px`,
+                      height: `${getGuideIconContainerSize()}px`,
                       backgroundColor: mixedColor,
-                      borderRadius: '10px',
-                      border: '3px solid #333',
+                      borderRadius: '8px',
+                      border: '2px solid #333',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      overflow: 'hidden'
+                      overflow: 'hidden',
+                      flexShrink: 0
                     }}>
                       <IconComponent
-                        size={42}
+                        size={getGuideIconSize()}
                         style={{
                           color: 'white',
                           stroke: 'white',
