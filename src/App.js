@@ -85,6 +85,9 @@ function App() {
             <option value={45}>45 Pages</option>
             <option value={50}>50 Pages</option>
           </select>
+          <button className="print-btn" onClick={() => window.print()}>
+            Print
+          </button>
         </div>
       </div>
       
