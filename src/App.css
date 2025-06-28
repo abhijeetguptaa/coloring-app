@@ -151,6 +151,12 @@
   border-radius: 4px;
 }
 
+/* Style for React Icons to appear as outlines */
+.image-container svg {
+  color: black !important;
+  filter: contrast(0) brightness(0);
+}
+
 .loading {
   display: flex;
   align-items: center;
@@ -159,20 +165,6 @@
   font-size: 1.2em;
   color: #666;
   font-weight: 500;
-}
-
-.image-placeholder {
-  text-align: center;
-  padding: 40px;
-  border: 2px dashed #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  color: #666;
-}
-
-.image-placeholder p {
-  margin: 10px 0;
-  font-size: 1.1em;
 }
 
 .page-footer {
@@ -238,7 +230,7 @@
     border-top: 1px solid #000;
   }
   
-  .loading, .image-placeholder {
+  .loading {
     display: none;
   }
   
