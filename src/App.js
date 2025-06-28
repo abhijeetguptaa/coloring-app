@@ -56,6 +56,22 @@ function App() {
     });
   }, []);
 
+  // Function to get mixed colors based on category and icon type
+  const getMixedColors = (category, iconIndex) => {
+    const colorPalettes = {
+      alphabets: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'],
+      animals: ['#ff6600', '#ff0066', '#6600ff', '#00ff66', '#ff6600', '#0066ff'],
+      birds: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'],
+      transports: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'],
+      insects: ['#ff6600', '#ff0066', '#6600ff', '#00ff66', '#ff6600', '#0066ff'],
+      fantasy: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'],
+      nature: ['#00ff00', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff']
+    };
+    
+    const palette = colorPalettes[category] || colorPalettes.alphabets;
+    return palette[iconIndex % palette.length];
+  };
+
   // Category icon pools
   const iconPools = useMemo(() => ({
     alphabets: alphabetComponents,
@@ -152,31 +168,79 @@ function App() {
         {loading ? (
           <div className="loading">Loading icons...</div>
         ) : (
-          outlines.map((IconComponent, index) => (
-            <div key={index} className="outline-page">
-              <div className="page-header">
-                <h2>Cartoon Coloring Outline</h2>
-                <p>Page {index + 1} of {selectedPages}</p>
-              </div>
-              <div className="image-container">
-                <div style={{ width: '600px', height: '600px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <IconComponent
-                    size={600}
-                    style={{
-                      color: 'black',
-                      stroke: 'black',
-                      strokeWidth: '2px',
-                      fill: 'none'
-                    }}
-                  />
+          outlines.map((IconComponent, index) => {
+            const mixedColor = getMixedColors(selectedCategory, index);
+            return (
+              <div key={index} className="outline-page">
+                <div className="page-header">
+                  <h2>Cartoon Coloring Outline</h2>
+                  <p>Page {index + 1} of {selectedPages}</p>
+                </div>
+                
+                <div className="image-container" style={{ position: 'relative' }}>
+                  <div style={{ width: '600px', height: '600px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    {/* Main outline icon for coloring */}
+                    <IconComponent
+                      size={600}
+                      style={{
+                        color: 'black',
+                        stroke: 'black',
+                        strokeWidth: '2px',
+                        fill: 'none'
+                      }}
+                    />
+                  </div>
+                  {/* Filled colored guide in top right corner */}
+                  <div style={{
+                    position: 'absolute',
+                    top: '0px',
+                    right: '0px',
+                    width: '105px',
+                    height: '105px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: 'white',
+                    borderRadius: '10px',
+                    border: '5px solid #333',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.5)',
+                    zIndex: 10
+                  }}>
+                    <div style={{ fontSize: '12px', fontWeight: 'bold', marginBottom: '5px', color: '#333' }}>
+                      COLOR GUIDE
+                    </div>
+                    <div style={{
+                      width: '56px',
+                      height: '56px',
+                      backgroundColor: mixedColor,
+                      borderRadius: '10px',
+                      border: '3px solid #333',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      overflow: 'hidden'
+                    }}>
+                      <IconComponent
+                        size={42}
+                        style={{
+                          color: 'white',
+                          stroke: 'white',
+                          strokeWidth: '2px',
+                          fill: 'white'
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="page-footer">
+                  <p>Name: _________________________</p>
+                  <p>Date: _________________________</p>
                 </div>
               </div>
-              <div className="page-footer">
-                <p>Name: _________________________</p>
-                <p>Date: _________________________</p>
-              </div>
-            </div>
-          ))
+            );
+          })
         )}
       </div>
     </div>
